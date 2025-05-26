@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class CadastroController extends Controller
 {
@@ -13,20 +15,25 @@ class CadastroController extends Controller
     }
 
     // Processa o formulário de cadastro
-    public function processForm(Request $request)
-    {
-        // Validação dos dados
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'telefone' => 'required|string|max:20',
-            'documento' => 'required|string|max:20',
-            'senha' => 'required|string|min:8|confirmed',
-        ]);
+public function processForm(Request $request)
+{
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'email' => 'required|string|max:255',
+        'telefone' => 'required|string|max:20',
+        'cpf/cnpj' => 'required|string|max:20',
+        'senha' => 'required|string',
+    ]);
 
-        // Aqui você processaria o cadastro (salvar no banco de dados, etc.)
-        // Por enquanto, vamos apenas redirecionar com uma mensagem de sucesso
+    Usuario::create([
+        'nome' => $request->input('nome'),
+        'email' => $request->input('email'),
+        'telefone' => $request->input('telefone'),
+        'cpf/cnpj' => $request->input('documento'),
+        'senha' => Hash::make($request->input('senha')),
+    ]);
 
-        return redirect()->route('cadastro.show')
-                         ->with('success', 'Cadastro realizado com sucesso!');
-    }
+    return redirect()->route('cadastro.show')
+                     ->with('success', 'Cadastro realizado com sucesso!');
+}
 }
