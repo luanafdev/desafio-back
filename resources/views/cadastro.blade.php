@@ -37,7 +37,8 @@
         }
         input[type="text"],
         input[type="tel"],
-        input[type="password"] {
+        input[type="password"], 
+        input[type="email"] {
             width: calc(100% - 20px);
             padding: 10px;
             border: 1px solid #ddd;
@@ -115,6 +116,14 @@
             </div>
 
             <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                @error('email')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="telefone">Telefone:</label>
                 <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" value="{{ old('telefone') }}" required>
                 @error('telefone')
@@ -123,8 +132,8 @@
             </div>
 
             <div class="form-group">
-                <label for="documento">CPF/CNPJ:</label>
-                <input type="text" id="documento" name="documento" placeholder="Apenas números ou com pontos/barras" value="{{ old('documento') }}" required>
+                <label for="cpf/cnpj">CPF/CNPJ:</label>
+                <input type="text" id="cpf/cnpj" name="cpf/cnpj" placeholder="Apenas números ou com pontos/barras" value="{{ old('documento') }}" required>
                 @error('documento')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
