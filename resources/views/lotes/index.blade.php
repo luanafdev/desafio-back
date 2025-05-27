@@ -256,27 +256,19 @@
                 document.getElementById("nome").value = data.nome;
                 document.getElementById("preco").value = parseFloat(data.preco).toFixed(2); // Ensure correct format for number input
                 document.getElementById("quantidade").value = data.quantidade;
-
-                // Format datetime for input[type="datetime-local"]
-                // The backend typically returns ISO 8601 format (e.g., "YYYY-MM-DDTHH:MM:SS")
-                // Use a helper function for consistent formatting
                 document.getElementById("data_inicio").value = formatDateTimeLocal(data.data_inicio);
                 document.getElementById("data_fim").value = formatDateTimeLocal(data.data_fim);
 
-                document.getElementById("descricao").value = data.descricao;
-
+               
                 modalTitle.textContent = `Editar Lote: ${data.nome}`;
                 form.action = `/lotes/${data.id}`;
-
-                // Add or update the _method input for PUT request
-                let methodInput = form.querySelector('input[name="_method"]');
-                if (!methodInput) {
-                    methodInput = document.createElement("input");
+                if (!form.querySelector('input[name="_method"]')) {
+                    const methodInput = document.createElement("input");
                     methodInput.type = "hidden";
                     methodInput.name = "_method";
                     form.appendChild(methodInput);
                 }
-                methodInput.value = "PUT";
+                form.querySelector('input[name="_method"]').value = "PUT";
 
                 modal.style.display = "block";
             })
