@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\Produtor;
 use App\Models\Usuario;
+use App\Models\Setor;
 use Illuminate\Http\Request;
 
-class EventoController extends Controller
+class SetorController extends Controller
 {
     public function index()
     {
-        $eventos = Evento::with(['produtor.usuario'])->get();
-         $produtores = Produtor::with('usuario')->get();
-        $usuarios = Usuario::select('id', 'nome')->get();
-
-        return view('eventos', compact('eventos', 'produtores', 'usuarios'));
+        $setores = Setor::with('evento')->get();
+        $eventos = Evento::all();
+        return view('setores', compact('setores', 'eventos'));
     }
 
     public function store(Request $request)

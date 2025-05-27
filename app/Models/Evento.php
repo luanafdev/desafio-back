@@ -15,6 +15,11 @@ class Evento extends Model
         'localizacao'
     ];
 
+    public function setores()
+    {
+        return $this->hasMany(Setor::class);
+    }
+    
     public function produtor()
     {
         return $this->belongsTo(Produtor::class);
