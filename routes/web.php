@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutorController;
 use App\Http\Controllers\CadastroController;
+use App\Http\Controllers\EventoController;
 
 
 // Rota para exibir o formulário de cadastro
@@ -18,4 +19,12 @@ Route::prefix('produtores')->group(function() {
     Route::post('/', [ProdutorController::class, 'store'])->name('produtores.store');
     Route::put('/{id}', [ProdutorController::class, 'update'])->name('produtores.update');
     Route::delete('/{id}', [ProdutorController::class, 'destroy'])->name('produtores.destroy');
+});
+
+Route::prefix('eventos')->group(function() {
+    Route::get('/', [EventoController::class, 'index'])->name('eventos.index');
+    Route::get('/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
+    Route::post('/', [EventoController::class, 'store'])->name('eventos.store');
+    Route::put('/{evento}', [EventoController::class, 'update'])->name('eventos.update');
+    Route::delete('/{evento}', [EventoController::class, 'destroy'])->name('eventos.destroy');
 });
