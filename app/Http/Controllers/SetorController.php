@@ -20,24 +20,21 @@ class SetorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'produtor_id' => 'required|exists:produtores,id',
-            'nome' => 'required|string|max:255',
-            'descricao' => 'required|string',
-            'data_evento' => 'required|string',
-            'banner_url' => 'nullable|url',
-            'localizacao' => 'required|string|max:255'
+            'evento_id' => 'required',
+            'nome' => 'required',
+            'descricao' => 'required',
         ]);
 
-        Evento::create($request->all());
+        Setor::create($request->all());
 
-        return redirect()->route('eventos.index')
-                         ->with('success', 'Evento criado com sucesso!');
+        return redirect()->route('setores.index')
+                         ->with('success', 'Setor criado com sucesso!');
     }
 
     public function edit($id)
     {
-        $evento = Evento::with('produtor.usuario')->findOrFail($id);
-        return response()->json($evento);
+        $setor = Setor::with('setores.evento')->findOrFail($id);
+        return response()->json($setor);
     }
 
     public function update(Request $request, $id)
