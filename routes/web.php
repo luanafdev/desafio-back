@@ -5,6 +5,7 @@ use App\Http\Controllers\ProdutorController;
 use App\Http\Controllers\CadastroController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\SetorController;
+use App\Http\Controllers\LoteController;
 
 
 // Rota para exibir o formulário de cadastro
@@ -36,4 +37,12 @@ Route::prefix('setores')->group(function() {
     Route::get('/{setor}/edit', [SetorController::class, 'edit'])->name('setores.edit');
     Route::put('/{setor}', [SetorController::class, 'update'])->name('setores.update');
     Route::delete('/{setor}', [SetorController::class, 'destroy'])->name('setores.destroy');
+});
+
+Route::prefix('lotes')->group(function() {
+    Route::get('/', [LoteController::class, 'index'])->name('lotes.index');
+    Route::post('/', [LoteController::class, 'store'])->name('lotes.store');
+    Route::get('/{lote}/edit', [LoteController::class, 'edit'])->name('lotes.edit');
+    Route::put('/{lote}', [LoteController::class, 'update'])->name('lotes.update');
+    Route::delete('/{lote}', [LoteController::class, 'destroy'])->name('lotes.destroy');
 });
