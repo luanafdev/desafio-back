@@ -40,21 +40,18 @@ class SetorController extends Controller
 
     public function update(Request $request, $id)
     {
-        $evento = Evento::findOrFail($id);
+        $setor = Setor::findOrFail($id);
         
-        $request->validate([
-            'produtor_id' => 'required|exists:produtores,id',
-            'nome' => 'required|string|max:255',
-            'descricao' => 'required|string',
-            'data_evento' => 'required|string',
-            'banner_url' => 'nullable|url',
-            'localizacao' => 'required|string|max:255'
+         $request->validate([
+            'evento_id' => 'required',
+            'nome' => 'required',
+            'descricao' => 'required',
         ]);
 
-        $evento->update($request->all());
+        $setor->update($request->all());
 
-        return redirect()->route('eventos.index')
-                         ->with('success', 'Evento atualizado com sucesso!');
+        return redirect()->route('setores.index')
+                         ->with('success', 'Setor atualizado com sucesso!');
     }
 
     public function destroy($id)
