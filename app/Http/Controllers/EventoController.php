@@ -12,7 +12,7 @@ class EventoController extends Controller
     public function index()
     {
         $eventos = Evento::with(['produtor.usuario'])->get();
-        $produtores = Produtor::with('usuario')->get();
+         $produtores = Produtor::with('usuario')->get();
         $usuarios = Usuario::select('id', 'nome')->get();
 
         return view('eventos', compact('eventos', 'produtores', 'usuarios'));
