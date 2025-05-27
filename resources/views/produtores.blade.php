@@ -153,7 +153,7 @@
         @endif
 
         {{-- Mensagens de erro --}}
-        @if ($errors->any()))
+        @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -206,7 +206,7 @@
                     
                     <div class="form-group">
                         <label for="usuario_id">Usuário:</label>
-                        <select name="usuario_id" required class="form-control">
+                        <select name="usuario_id" id="usuario_id" required class="form-control">
                             @foreach($usuarios as $usuario)
                                 <option value="{{ $usuario->id }}">{{ $usuario->nome }}</option>
                             @endforeach
@@ -239,6 +239,7 @@
             modalTitle.textContent = "Novo Produtor";
             form.reset();
             document.getElementById("produtor_id").value = "";
+            document.getElementById("usuario_id").value = "";
         }
 
         span.onclick = function() {
@@ -251,45 +252,70 @@
             }
         }
 
-        function editarProdutor(id) {
-    fetch(`/produtores/edit/` + id)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao carregar dados');
-            }
-            return response.json();
-        })
-        .then(data => {
-            document.getElementById("produtor_id").value = data.id;
-            document.getElementById("usuario_id").value = data.usuario_id;
-            document.getElementById("nome_empresa").value = data.nome_empresa;
-            
-            // Atualiza o título do modal com o nome do usuário
-            document.getElementById("modalTitle").textContent = 
-                `Editar Produtor: ${data.usuario_name || 'N/A'}`;
-            
-            // Configura o form
-            const form = document.getElementById("produtorForm");
-            form.action = `/produtores/${data.id}`;
-            // Garante que o método PUT está configurado
-            let methodInput = form.querySelector('input[name="_method"]');
-            
-            if (!methodInput) {
-                methodInput = document.createElement("input");
-                methodInput.type = "hidden";
-                methodInput.name = "_method";
-                form.appendChild(methodInput);
-            }
-            methodInput.value = "PUT";
-            
-            // Exibe o modal
-            document.getElementById("produtorModal").style.display = "block";
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Erro ao carregar dados do produtor');
-        });
+    function editarProdutor(id) {
+    // Verifica se os elementos principais existem antes de fazer a requisição
+    const requiredElements = {
+        produtorId: document.getElementById("produtor_id"),
+        usuarioId: document.getElementById("usuario_id"),
+        nomeEmpresa: document.getElementById("nome_empresa"),
+        modalTitle: document.getElementById("modalTitle"),
+        form: document.getElementById("produtorForm"),
+        modal: document.getElementById("produtorModal")
+    };
+
+    // Verifica elementos faltantes
+    const missingElements = Object.entries(requiredElements)
+        .filter(([key, el]) => !el)
+        .map(([key]) => key);
+
+    if (missingElements.length > 0) {
+        console.error('Elementos faltando:', missingElements);
+        alert(`Erro: Elementos não encontrados: ${missingElements.join(', ')}`);
+        return;
     }
+
+    fetch(`/produtores/${id}/edit`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Dados recebidos:', data); // Para depuração
+        
+        // Atribui valores
+        requiredElements.produtorId.value = data.data.id;
+        requiredElements.usuarioId.value = data.data.usuario_id;
+        requiredElements.nomeEmpresa.value = data.data.nome_empresa;
+        requiredElements.modalTitle.textContent = `Editar Produtor: ${data.data.usuario_name}`;
+        
+        // Configura o form para atualização
+        requiredElements.form.action = `/${data.data.id}/produtores/`;
+        
+        // Configura o método PUT
+        let methodInput = requiredElements.form.querySelector('input[name="_method"]');
+        if (!methodInput) {
+            methodInput = document.createElement("input");
+            methodInput.type = "hidden";
+            methodInput.name = "_method";
+            requiredElements.form.appendChild(methodInput);
+        }
+        methodInput.value = "PUT";
+        
+        // Exibe o modal
+        requiredElements.modal.style.display = "block";
+    })
+    .catch(error => {
+        console.error('Erro completo:', {
+            message: error.message,
+            stack: error.stack,
+            id: id,
+            url: `/produtores/${id}/edit`
+        });
+        alert(`Falha ao carregar produtor: ${error.message}\nVerifique o console para detalhes.`);
+    });
+}
     </script>
 </body>
 </html>

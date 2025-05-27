@@ -19,17 +19,6 @@ class ProdutorController extends Controller
         return view('produtores', compact('produtores', 'usuarios'));
     }
 
-    public function edit($id)
-    {
-        $produtor = Produtor::with('usuario')->findOrFail($id);
-        return response()->json([
-            'id' => $produtor->id,
-            'usuario_id' => $produtor->usuario_id,
-            'nome_empresa' => $produtor->nome_empresa,
-            'usuario_nome' => $produtor->usuario->nome // Adiciona o nome para exibição
-        ]);
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -60,10 +49,34 @@ class ProdutorController extends Controller
             'nome_empresa' => $request->nome_empresa,
         ]);
 
-        return redirect()->route('produtores')
+        return redirect()->route('produtores.index')
                          ->with('success', 'Produtor atualizado com sucesso!');
     }
 
+    public function edit($id)
+{
+    try {
+        $produtor = Produtor::with('usuario')->findOrFail($id);
+        
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'id' => $produtor->id,
+                'usuario_id' => $produtor->usuario_id,
+                'nome_empresa' => $produtor->nome_empresa,
+                'usuario_name' => $produtor->usuario->nome ?? 'N/A'
+            ]
+        ], 200, [
+            'Content-Type' => 'application/json; charset=utf-8'
+        ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Produtor não encontrado'
+        ], 404);
+    }
+}
     public function destroy($id)
     {
         $produtor = Produtor::findOrFail($id);

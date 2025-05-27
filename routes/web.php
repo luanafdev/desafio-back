@@ -14,7 +14,7 @@ Route::post('/cadastro', [CadastroController::class, 'processForm'])->name('cada
 
 Route::prefix('produtores')->group(function() {
     Route::get('/', [ProdutorController::class, 'index'])->name('produtores.index');
-    Route::get('/edit/{id}', [ProdutorController::class, 'edit'])->name('produtores.edit');
+    Route::get('/{produtor}/edit', [ProdutorController::class, 'edit'])->name('produtores.edit');
     Route::post('/', [ProdutorController::class, 'store'])->name('produtores.store');
     Route::put('/{id}', [ProdutorController::class, 'update'])->name('produtores.update');
     Route::delete('/{id}', [ProdutorController::class, 'destroy'])->name('produtores.destroy');
