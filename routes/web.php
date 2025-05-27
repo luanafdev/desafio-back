@@ -44,5 +44,5 @@ Route::prefix('lotes')->group(function() {
     Route::post('/', [LoteController::class, 'store'])->name('lotes.store');
     Route::get('/{lote}/edit', [LoteController::class, 'edit'])->name('lotes.edit');
     Route::put('/{lote}', [LoteController::class, 'update'])->name('lotes.update');
-    Route::delete('/{lote\}', [LoteController::class, 'destroy'])->name('lotes.destroy');
+    Route::delete('/{lote}', [LoteController::class, 'destroy'])->name('lotes.destroy');
 });
