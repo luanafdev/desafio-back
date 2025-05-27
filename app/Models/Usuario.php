@@ -20,4 +20,5 @@ class Usuario extends Authenticatable
     protected $hidden = [
         'senha',
     ];
+    
 }
