@@ -69,7 +69,7 @@ class ProdutorController extends Controller
         $produtor = Produtor::findOrFail($id);
         $produtor->delete();
 
-        return redirect()->route('produtores')
+        return redirect()->route('produtores.index')
                          ->with('success', 'Produtor excluído com sucesso!');
     }
 }

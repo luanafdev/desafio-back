@@ -271,9 +271,9 @@
             // Configura o form
             const form = document.getElementById("produtorForm");
             form.action = `/produtores/${data.id}`;
-            
             // Garante que o método PUT está configurado
             let methodInput = form.querySelector('input[name="_method"]');
+            
             if (!methodInput) {
                 methodInput = document.createElement("input");
                 methodInput.type = "hidden";

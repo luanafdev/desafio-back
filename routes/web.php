@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutorController;
+use App\Http\Controllers\CadastroController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Rota para exibir o formulário de cadastro
 Route::get('/cadastro', [CadastroController::class, 'showForm'])->name('cadastro.show');
