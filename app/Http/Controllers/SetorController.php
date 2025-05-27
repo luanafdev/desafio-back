@@ -33,7 +33,8 @@ class SetorController extends Controller
 
     public function edit($id)
     {
-        $setor = Setor::with('setores.evento')->findOrFail($id);
+        $setor = Setor::with('evento')->findOrFail($id);
+
         return response()->json($setor);
     }
 
@@ -58,10 +59,10 @@ class SetorController extends Controller
 
     public function destroy($id)
     {
-        $evento = Evento::findOrFail($id);
-        $evento->delete();
+        $setor = Setor::findOrFail($id);
+        $setor->delete();
 
-        return redirect()->route('eventos.index')
-                         ->with('success', 'Evento excluído com sucesso!');
+        return redirect()->route('setores.index')
+                         ->with('success', 'Setor excluído com sucesso!');
     }
 }
