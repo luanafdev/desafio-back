@@ -32,6 +32,7 @@ class CheckoutController extends Controller
     $valorUnitario = 1000; // Exemplo: R$10,00 em centavos
     $valorTotal = $quantidade * $valorUnitario;
 
+    //Não consegui completar essa parte do projeto por conta de dificuldades com a plataforma e prazo, mas deixei aqui uma implementação base.
      $companyId = env('PAGGUE_COMPANY_ID');
     $signature = env('PAGGUE_SIGNATURE');
 
