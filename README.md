@@ -19,8 +19,34 @@ Este projeto é um ambiente Laravel rodando com Docker, utilizando PostgreSQL co
 ```bash
 git clone https://github.com/usuario/repositorio.git
 cd repositorio
+```
 
 ### 2️ -  Copie o arquivo de ambiente
 ```bash
 cp .env.example .env
+```
 
+### 3 - Configure o arquivo .env
+```bash
+DB_CONNECTION=pgsql
+DB_HOST=localhost 
+DB_PORT=5432  
+DB_DATABASE=banco-desafio
+DB_USERNAME=postgres
+DB_PASSWORD=123
+```
+
+### 4 - Suba os containers para o Docker
+```bash
+docker-compose up -d --build
+```
+
+### 5 - No terminal dentro do container, execute:
+```bash
+composer install
+```
+
+### 6 - Execute o projeto:
+```bash
+php artisan serve
+```
