@@ -15,101 +15,46 @@
             min-height: 100vh;
             margin: 0;
         }
-        .button {
-            border-radius: 9999px; /* Makes them pill-shaped */
-            padding: 12px 24px; /* Adjust as needed */
-            font-size: 16px;
-            font-weight: bold; /* Based on "huruf tebal di wa" which implies bold text */
-            cursor: pointer;
-            display: inline-flex; /* Allows for centering text if needed */
-            align-items: center;
-            justify-content: center;
-            text-decoration: none; /* If they are links */
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-        .container {
-            text-align: center;
-        }
-        .button {
-            background-color: #EA4C89;
-            border-radius: 8px;
-            border-style: none;
-            box-sizing: border-box;
-            color: #FFFFFF;
-            cursor: pointer;
-            display: inline-block;
-            font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            height: 40px;
-            line-height: 20px;
-            list-style: none;
-            margin: 0;
-            outline: none;
-            padding: 10px 16px;
-            position: relative;
-            text-align: center;
-            text-decoration: none;
-            transition: color 100ms;
-            vertical-align: baseline;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            }
-
-            .button:hover,
-            .button:focus {
-            background-color: #F082AC;
-            }
-        .main-button {
-            background-color: #2563eb;
-            color: white;
-            padding: 20px 80px;
-            margin-bottom: 40px;
-            border: none;
-            border-radius: 12px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transition: background-color 0.3s, transform 0.2s;
+        
+        /* CSS */
+        .button-9 {
+        appearance: button;
+        backface-visibility: hidden;
+        background-color: #405cf5;
+        border-radius: 6px;
+        border-width: 0;
+        box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+        font-size: 100%;
+        height: 44px;
+        line-height: 1.15;
+        margin: 12px 0 0;
+        outline: none;
+        overflow: hidden;
+        padding: 0 25px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transform: translateZ(0);
+        transition: all .2s,box-shadow .08s ease-in;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 100%;
+        margin-bottom: 15px;
         }
 
-        .main-button:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
+        .button-9:disabled {
+        cursor: default;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
+        .button-9:focus {
+        box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
         }
-
-        .small-button {
-            background-color: white;
-            color: #374151;
-            padding: 18px 40px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            font-size: 22px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
-        }
-
-        .small-button:hover {
-            background-color: #f9fafb;
-            transform: translateY(-2px);
-            border-color: #d1d5db;
-        }
-
-        a {
-            text-decoration: none;
-        }
+        
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -117,8 +62,8 @@
     <div class="flex flex-col items-center space-y-6">
         
         <!-- Botão principal -->
-        <a href="{{ route('home') }}">
-            <button>
+        <a href="{{ route('home') }}" >
+            <button class="button-9">
                 Comprar Ingresso
             </button> 
         </a>
@@ -127,19 +72,19 @@
         <div class="grid grid-cols-2 gap-6">
 
             <a href="{{ route('eventos.index') }}">
-                <button> Evento</button>
+                <button class="button-9"> Eventos</button>
             </a>
             
             <a href="{{ route('lotes.index') }}">
-                <button>Lotes</button> 
+                <button class="button-9">Lotes</button> 
             </a>
 
             <a href="{{ route('produtores.index') }}">
-                <button>Produtores</button> 
+                <button class="button-9">Produtores</button> 
             </a>
 
             <a href="{{ route('setores.index') }}">
-                 <button>Setores</button>
+                 <button class="button-9">Setores</button>
             </a>
         </div>
     </div>
