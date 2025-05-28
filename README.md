@@ -14,8 +14,13 @@ Este projeto é um ambiente Laravel rodando com Docker, utilizando PostgreSQL co
 ---
 
 
-### 1️ Clone o projeto
+### 1️ - Clone o projeto
 
 ```bash
 git clone https://github.com/usuario/repositorio.git
 cd repositorio
+
+### 2️ -  Copie o arquivo de ambiente
+```bash
+cp .env.example .env
+
