@@ -54,3 +54,4 @@ Route::prefix('lotes')->group(function() {
 
 Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');
 Route::post('/checkout/{id}', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::post('/paggue/webhook', [PaymentController::class, 'handleWebhook'])->name('paggue.webhook');

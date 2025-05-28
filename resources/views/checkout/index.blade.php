@@ -145,8 +145,14 @@
                 <input type="number" name="quantidade" id="quantidade" value="1" min="1" required>
             </div>
 
-            <button type="submit">Finalizar Compra</button>
+            <button action="{{ route('pedido.process', $evento->id) }}" type="submit">Finalizar Compra</button>
         </form>
+        @if(session('pixQrCodeUrl'))
+            <h3>Pagamento via PIX</h3>
+            <p>Escaneie o QR Code abaixo para concluir o pagamento:</p>
+            <img src="{{ session('pixQrCodeUrl') }}" alt="QR Code PIX" />
+        @endif
+
     </div>
 </body>
 </html>
