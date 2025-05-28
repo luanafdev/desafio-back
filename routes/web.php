@@ -6,6 +6,7 @@ use App\Http\Controllers\CadastroController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\SetorController;
 use App\Http\Controllers\LoteController;
+use App\Http\Controllers\CheckoutController;
 
 
 // Rota para exibir o formulário de cadastro
@@ -50,3 +51,6 @@ Route::prefix('lotes')->group(function() {
     Route::put('/{lote}', [LoteController::class, 'update'])->name('lotes.update');
     Route::delete('/{lote}', [LoteController::class, 'destroy'])->name('lotes.destroy');
 });
+
+Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');
+Route::post('/checkout/{id}', [CheckoutController::class, 'process'])->name('checkout.process');
